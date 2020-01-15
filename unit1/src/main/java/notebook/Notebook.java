@@ -1,3 +1,5 @@
+package notebook;
+
 import java.util.Arrays;
 
 public class Notebook {

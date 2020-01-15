@@ -1,3 +1,5 @@
+package notebook;
+
 public class Note {
     private String name;
 
@@ -15,7 +17,7 @@ public class Note {
 
     @Override
     public String toString() {
-        return "Note{" +
+        return "notebook.Note{" +
                 "name='" + name + '\'' +
                 '}';
     }
