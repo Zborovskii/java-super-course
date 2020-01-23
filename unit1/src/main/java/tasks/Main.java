@@ -5,38 +5,41 @@ public class Main {
     public static void main(String[] args) {
         //Task 2. Start
 
-        Integer[] numbers = new Integer[4];
-        Integer index = 0;
+        Integer[] numbers = new Integer[]{1, 2, 3, 4, 5, 6};
+        Integer[] result = new Integer[9];
 
-        for (Integer i = 1; i < 10; i++) {
-            if (i % 2 == 0) {
-                numbers[index] = i;
-                index++;
+        //cycle for
+        for (Integer i = 0; i < numbers.length; i++) {
+            if ((i - 1) % 2 == 0) {
+                result[i] = numbers[i] * numbers[i - 1];
+            } else {
+                result[i] = numbers[i];
             }
         }
 
-        //cycle for
-        for (Integer i = 1; i < numbers.length; i += 2) {
-            System.out.println(numbers[i] * numbers[i - 1]);
-        }
-
         //cycle do while
-        Integer i = 1;
+        Integer i = 0;
         do {
-            System.out.println(numbers[i] * numbers[i - 1]);
-            i += 2;
-
+            if ((i - 1) % 2 == 0) {
+                result[i] = numbers[i] * numbers[i - 1];
+            } else {
+                result[i] = numbers[i];
+            }
+            i++;
         }
-        while (i < 4);
+        while (i < numbers.length);
 
         //cycle while
-        i = 1;
-        while (i < 4) {
-            System.out.println(numbers[i] * numbers[i - 1]);
-            i += 2;
+        i = 0;
+        while (i < numbers.length) {
+            if ((i - 1) % 2 == 0) {
+                result[i] = numbers[i] * numbers[i - 1];
+            } else {
+                result[i] = numbers[i];
+            }
+            i++;
         }
         //Task 2. finish
-
 
         //Task 4
         int[] arr = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -44,14 +47,12 @@ public class Main {
 
     }
 
-
     //Task 3
     public static void function(Double x) {
         Double y = Math.tan(2 * x) - 3;
 
-        System.out.println(" x | y \n" + String.format(" %s | %s ", x, y));
+        //        System.out.println(" x | y \n" + String.format(" %s | %s ", x, y));
     }
-
 
     //Task 4 method
     private static Integer getMax(int[] arr) {
@@ -73,6 +74,6 @@ public class Main {
             result += "\n";
         }
 
-        System.out.println(result);
+        //        System.out.println(result);
     }
 }
