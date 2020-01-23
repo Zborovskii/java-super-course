@@ -1,5 +1,6 @@
 package notebook;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 public class Notebook {
@@ -15,14 +16,14 @@ public class Notebook {
      * @param note запись которую мы хотим сохранить
      */
     public void addNote(Note note) {
-        if (notes.length == 0) {
-            notes = new Note[]{note};
-        } else {
+//        if (notes.length == 0) {
+//            notes = new Note[]{note};
+//        } else {
             Note[] newArray = Arrays.copyOf(notes, notes.length + 1);
 
             newArray[newArray.length - 1] = note;
             notes = newArray;
-        }
+//        }
     }
 
     /**
@@ -57,7 +58,7 @@ public class Notebook {
      */
     public void editNote(Integer indexOfNote, String note) {
         if (indexOfNote > notes.length) {
-            throw new Error("noteNumber is out of notes bounds");
+            new FileNotFoundException("File with such index isn't exist");
         } else {
             notes[indexOfNote] = new Note(note);
         }
@@ -72,5 +73,5 @@ public class Notebook {
         return notes;
     }
 
-    
+
 }
