@@ -3,11 +3,10 @@ package tasks;
 public class Main {
 
     public static void main(String[] args) {
-        //Task 2. Start
 
+        //Task 2. Start
         Integer[] numbers = new Integer[]{1, 2, 3, 4, 5, 6};
         Integer[] result = new Integer[9];
-
         //cycle for
         for (Integer i = 0; i < numbers.length; i++) {
             if ((i - 1) % 2 == 0) {
@@ -39,41 +38,52 @@ public class Main {
             }
             i++;
         }
+
         //Task 2. finish
 
         //Task 4
-        int[] arr = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        Main.getMax(arr);
-
+        Main.getMax(new int[]{1,2,3,4});
     }
 
     //Task 3
-    public static void function(Double x) {
-        Double y = Math.tan(2 * x) - 3;
+    public static void calculateFunction(int a, int b, int h) {
 
-        //        System.out.println(" x | y \n" + String.format(" %s | %s ", x, y));
+        System.out.println(" x | y \n");
+
+        for (int i = a; b > i * h; i++) {
+            System.out.println(String.format(" %s | %s ", i, Math.tan(2 * i) - 3));
+        }
     }
 
     //Task 4 method
-    private static Integer getMax(int[] arr) {
-        return Math.max((arr[0] + arr[arr.length - 1]), arr[1] + arr[arr.length - 2]);
+    private static Integer[] getMax(int[] arr) {
+        int pairQuantity = arr.length / 2;
+        Integer[] result = new Integer[pairQuantity];
+
+        for (int i = 1; i <= pairQuantity; i++) {
+            result[i - 1] = Math.max(arr[i - 1], arr[arr.length - i]);
+        }
+
+        return result;
     }
 
     //Task5
+
     public static void printMatrix(Integer size) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
 
         for (Integer i = 0; i < size; i++) {
             for (Integer j = 0; j < size; j++) {
                 if (i == j || i + j == size - 1) {
-                    result += "1";
+                    result.append("1");
                 } else {
-                    result += "0";
+                    result.append("0");
                 }
             }
-            result += "\n";
+            result.append("\n");
         }
 
-        //        System.out.println(result);
+        System.out.println(result);
     }
+
 }
