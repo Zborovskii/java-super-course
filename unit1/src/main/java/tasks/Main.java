@@ -43,7 +43,7 @@ public class Main {
         calculateFunction(1,6,2);
 
         //Task 4
-        Arrays.toString(Main.getMax(new int[]{1, 2, 3, 10, 5 ,20}));
+        System.out.println(" max  -  " + Main.getMax(new int[]{1, 20, 3, 10, 5 ,20}));
 
         //Task 5
         printMatrix(5);
@@ -60,14 +60,15 @@ public class Main {
     }
 
     //Task 4 method
-    private static Integer[] getMax(int[] arr) {
-        int pairQuantity = arr.length / 4;
-        Integer[] result = new Integer[pairQuantity];
+    private static int getMax(int[] arr) {
+        int pairQuantity = arr.length / 2;
+        int[] result = new int[pairQuantity];
 
-        for (int i = 1; i <= pairQuantity; i++) {
-            result[i - 1] = Math.max(arr[i - 1] + arr[arr.length - i], arr[i] + arr[arr.length - 1 - i]);
+        for (int i = 0; i < pairQuantity; i++) {
+
+            result[i] = arr[i] + arr[arr.length - 1 - i];
         }
-        return result;
+        return Arrays.stream(result).max().getAsInt();
     }
 
     //Task5
