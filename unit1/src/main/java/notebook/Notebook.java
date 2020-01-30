@@ -58,7 +58,7 @@ public class Notebook {
      */
     public void editNote(Integer indexOfNote, String note) {
         if (indexOfNote > notes.length) {
-            new FileNotFoundException("File with such index isn't exist");
+            new IndexOutOfBoundsException("File with index - " + indexOfNote +  " isn't exist");
         } else {
             notes[indexOfNote] = new Note(note);
         }
