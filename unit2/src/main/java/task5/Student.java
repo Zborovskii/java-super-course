@@ -1,12 +1,11 @@
 package task5;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Student {
 
     private String name;
-    private HashMap<String, Double> marks;
+    private Map<String, List<Number>> marks;
 
     public Student(String name) {
         this.name = name;
@@ -21,16 +20,28 @@ public class Student {
         this.name = name;
     }
 
-    public Map<String, Double> getMarks() {
+    public Map<String, List<Number>> getMarks() {
         return marks;
     }
 
-    public void setMark(Subject subject, Number mark) {
-        marks.put(subject.getName(), (double) mark);
-    }
+    public void customSetMark(Subject subject, Number mark) {
+        System.out.println(mark);
+        if (
+                (subject.getWhole() && (mark.floatValue() % 1 != 0)) || (!subject.getWhole() && (mark.floatValue() % 1 == 0))
+        ) {
+            throw new Error("По предмету - " + subject.getName() + " введен не допустимый тип числа");
+        }
 
-    public void setMark(Subject subject, double mark) {
-        marks.put(subject.getName(), mark);
+
+        if (marks.containsKey(subject.getName())) {
+
+            List<Number> marksList = new ArrayList<>();
+            marksList.addAll(marks.get(subject.getName()));
+
+            marks.put(subject.getName(), marksList);
+        } else {
+            marks.put(subject.getName(), Arrays.asList(mark));
+        }
     }
 
     @Override

@@ -1,4 +1,4 @@
-package Task3;
+package task3;
 
 import java.util.Objects;
 
@@ -26,7 +26,6 @@ public class Stationery {
     public void setPrice(Integer price) {
         this.price = price;
     }
-
 
 
     @Override

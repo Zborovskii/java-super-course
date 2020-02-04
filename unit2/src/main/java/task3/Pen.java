@@ -1,6 +1,6 @@
-package Task3;
+package task3;
 
-public class Pen extends Stationery{
+public class Pen extends Stationery {
 
     private String brand;
 

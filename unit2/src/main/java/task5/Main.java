@@ -17,34 +17,48 @@ public class Main {
         Student student5 = new Student("sam");
 
 
-        student1.setMark(math, 5);
-        student1.setMark(algebra, 3.5);
-        student1.setMark(history, 4);
+        student1.customSetMark(math, 5.2);
+        student1.customSetMark(algebra, 3.5);
+        student1.customSetMark(history, 4);
 
-        student2.setMark(history, 5);
-        student2.setMark(math, 5);
+        student2.customSetMark(history, 5);
+        student2.customSetMark(math, 5.9);
 
-        student3.setMark(math, 4.5);
-        student3.setMark(math, 4.5);
-        student3.setMark(math, 5);
+        student3.customSetMark(math, 4.5);
+        student3.customSetMark(math, 4.5);
+        student3.customSetMark(math, 5.1);
 
-        student4.setMark(history, 5);
-        student4.setMark(algebra, 2);
+        student4.customSetMark(history, 5);
+        student4.customSetMark(algebra, 2.1);
 
-        student5.setMark(history, 2.5);
+        student5.customSetMark(history, 3);
 
         List<Student> studentsList = Arrays.asList(student1, student2, student3, student4, student5);
 
         //группа по математике
-        studentsList.stream().filter(student -> student.getMarks().containsKey("math")).forEach(System.out::println);
+        groupStudentsBySubject(studentsList, "math");
 
         //оценки в группе по математике
-        studentsList.stream().
-                map(Student::getMarks).
-                filter(subject -> subject.containsKey("math")).
-                map(subject -> subject.get("math")).
-                mapToDouble(i -> i).
-                average().
-                ifPresent(System.out::println);
+        getGroupMarksBySubject(studentsList, "math");
+    }
+
+    private static void groupStudentsBySubject(List<Student> studentsList, String subject) {
+        studentsList.stream()
+                .filter(student -> student.getMarks().containsKey(subject))
+                .forEach(System.out::println);
+
+    }
+
+    private static void getGroupMarksBySubject(List<Student> studentsList, String subject) {
+        studentsList.stream()
+                .map(Student::getMarks)
+                .filter(s -> s.containsKey(subject))
+                .map(s -> s.get(subject))
+                .mapToDouble(i -> i.stream()
+                        .mapToDouble(j -> j.floatValue())
+                        .average()
+                        .getAsDouble())
+                .average()
+                .ifPresent(System.out::println);
     }
 }

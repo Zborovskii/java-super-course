@@ -1,6 +1,6 @@
-package Task3;
+package task3;
 
-public class Pencil extends Stationery{
+public class Pencil extends Stationery {
 
     private String softness;
 
