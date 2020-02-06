@@ -1,4 +1,4 @@
-package task1;
+package ru.task1;
 
 import java.util.Objects;
 

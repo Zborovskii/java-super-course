@@ -1,4 +1,4 @@
-package task5;
+package ru.task5;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package task3;
+package ru.task3;
 
 public class Pen extends Stationery {
 

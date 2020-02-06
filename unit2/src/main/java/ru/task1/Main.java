@@ -1,4 +1,4 @@
-package task7;
+package ru.task1;
 
 public class Main {
 

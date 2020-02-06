@@ -1,4 +1,4 @@
-package task6;
+package ru.task6;
 
 public class NuclearSubmarin {
 

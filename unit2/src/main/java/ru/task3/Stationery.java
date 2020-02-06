@@ -1,4 +1,6 @@
-package task2;
+package ru.task3;
+
+import java.util.Objects;
 
 public class Stationery {
     private String name;
@@ -23,6 +25,21 @@ public class Stationery {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Stationery that = (Stationery) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(price, that.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price);
     }
 
     @Override
