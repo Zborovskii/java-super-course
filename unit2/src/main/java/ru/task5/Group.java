@@ -12,7 +12,7 @@ public class Group<T extends Number> {
 
     public Group(Subject subject) {
         this.subject = subject;
-        this.marksList = new HashMap<Student, List<T>>();
+        this.marksList = new HashMap();
     }
 
     public Subject getSubject() {
@@ -38,8 +38,9 @@ public class Group<T extends Number> {
             throw new Error(student.getName() + " - нет в группе " + this.subject);
         }
 
-        List<T> newListOfMarks = new ArrayList<T>();
+        List<T> newListOfMarks = new ArrayList();
         newListOfMarks.addAll(marksList.get(student));
+        newListOfMarks.add(mark);
 
         marksList.put(student, newListOfMarks);
     }

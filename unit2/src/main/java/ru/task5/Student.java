@@ -1,6 +1,7 @@
 package ru.task5;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Student {
 
@@ -9,7 +10,7 @@ public class Student {
 
     public Student(String name) {
         this.name = name;
-        this.groupList = new ArrayList<Group>();
+        this.groupList = new ArrayList();
     }
 
     public String getName() {

@@ -1,11 +1,12 @@
 package ru.task5;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
-    private static Random random = new Random();
 
     public static void main(String[] args) {
 
@@ -13,9 +14,9 @@ public class Main {
         Student student2 = new Student("Alex");
         Student student3 = new Student("Sveta");
 
-        Group<Integer> groupMath = new Group<Integer>(Subject.MATH);
-        Group<Integer> groupHistory = new Group<Integer>(Subject.HISTORY);
-        Group<Double> groupAlgebra = new Group<Double>(Subject.ALGEBRA);
+        Group<Integer> groupMath = new Group(Subject.MATH);
+        Group<Integer> groupHistory = new Group(Subject.HISTORY);
+        Group<Double> groupAlgebra = new Group(Subject.ALGEBRA);
 
         groupAlgebra.addStudentToGroup(student1);
         groupAlgebra.addStudentToGroup(student2);
@@ -25,7 +26,7 @@ public class Main {
 
         groupAlgebra.addMarkToStudent(student2, 0.5);
         groupAlgebra.addMarkToStudent(student2, 0.5);
-        groupAlgebra.addMarkToStudent(student1, 0.5);
+        groupAlgebra.addMarkToStudent(student1, 5.5);
         groupAlgebra.addMarkToStudent(student1, 1.5);
 
         groupHistory.addMarkToStudent(student2, 1);
@@ -35,25 +36,29 @@ public class Main {
         groupMath.addMarkToStudent(student2, 5);
         groupMath.addMarkToStudent(student2, 5);
 
-
-
-        showGroupMarksBySubject(groupAlgebra);
+        System.out.println(showGroupMarksBySubject(groupAlgebra, student2));
+        System.out.println(showAverageMark(Arrays.asList(groupAlgebra, groupHistory, groupMath), student2));
     }
 
+    //выводит среднюю оценку по конкретному студенту
+    public static Double showAverageMark(List<Group> groupList, Student student) {
 
-    public static void showGroupMarksBySubject(Group group) {
-       group.getMarksList().entrySet().forEach(Student::getName);
+        return groupList.stream()
+                .map(i -> showGroupMarksBySubject(i, student))
+                .flatMap(Collection::stream)
+                .mapToDouble(Number::doubleValue)
+                .average().getAsDouble();
     }
 
+    //выводит все оценки по предмету по студенту
+    public static List<Number> showGroupMarksBySubject(Group group, Student student) {
+        Map<Student, List<Number>> studentsMarks = group.getMarksList();
 
-    public static void showAverageMark(Student student, List<Integer> marksList){
-
-
+        return studentsMarks.entrySet().stream()
+                .filter(i -> i.getKey().getName().equals(student.getName()))
+                .flatMap(e -> e.getValue().stream())
+                .collect(Collectors.toList());
     }
-
-
-
-
 
 
 }
