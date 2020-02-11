@@ -10,7 +10,7 @@ public class Student {
 
     public Student(String name) {
         this.name = name;
-        this.groupList = new ArrayList();
+        this.groupList = new ArrayList<>();
     }
 
     public String getName() {

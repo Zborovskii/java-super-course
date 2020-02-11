@@ -14,9 +14,9 @@ public class Main {
         Student student2 = new Student("Alex");
         Student student3 = new Student("Sveta");
 
-        Group<Integer> groupMath = new Group(Subject.MATH);
-        Group<Integer> groupHistory = new Group(Subject.HISTORY);
-        Group<Double> groupAlgebra = new Group(Subject.ALGEBRA);
+        Group<Integer> groupMath = new Group<>(Subject.MATH);
+        Group<Integer> groupHistory = new Group<>(Subject.HISTORY);
+        Group<Double> groupAlgebra = new Group<>(Subject.ALGEBRA);
 
         groupAlgebra.addStudentToGroup(student1);
         groupAlgebra.addStudentToGroup(student2);
@@ -41,7 +41,7 @@ public class Main {
     }
 
     //выводит среднюю оценку по конкретному студенту
-    public static Double showAverageMark(List<Group> groupList, Student student) {
+    private static Double showAverageMark(List<Group> groupList, Student student) {
 
         return groupList.stream()
                 .map(i -> showGroupMarksBySubject(i, student))
@@ -51,7 +51,7 @@ public class Main {
     }
 
     //выводит все оценки по предмету по студенту
-    public static List<Number> showGroupMarksBySubject(Group group, Student student) {
+    private static List<Number> showGroupMarksBySubject(Group group, Student student) {
         Map<Student, List<Number>> studentsMarks = group.getMarksList();
 
         return studentsMarks.entrySet().stream()
