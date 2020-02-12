@@ -3,7 +3,6 @@ package ru.task5;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -47,18 +46,16 @@ public class Main {
                 .map(i -> showGroupMarksBySubject(i, student))
                 .flatMap(Collection::stream)
                 .mapToDouble(Number::doubleValue)
-                .average().getAsDouble();
+                .average()
+                .orElse(0.0);
     }
 
     //выводит все оценки по предмету по студенту
-    private static List<Number> showGroupMarksBySubject(Group group, Student student) {
-        Map<Student, List<Number>> studentsMarks = group.getMarksList();
+    private static List<Number> showGroupMarksBySubject(Group<?> group, Student student) {
 
-        return studentsMarks.entrySet().stream()
+        return group.getMarksList().entrySet().stream()
                 .filter(i -> i.getKey().getName().equals(student.getName()))
                 .flatMap(e -> e.getValue().stream())
                 .collect(Collectors.toList());
     }
-
-
 }
