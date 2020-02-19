@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Student student1 = new Student("Sasha");
         Student student2 = new Student("Alex");
@@ -40,14 +40,14 @@ public class Main {
     }
 
     //выводит среднюю оценку по конкретному студенту
-    private static Double showAverageMark(List<Group> groupList, Student student) {
+    private static Double showAverageMark(List<Group> groupList, Student student) throws Exception {
 
         return groupList.stream()
                 .map(i -> showGroupMarksBySubject(i, student))
                 .flatMap(Collection::stream)
                 .mapToDouble(Number::doubleValue)
                 .average()
-                .orElse(0.0);
+                .orElseThrow(()-> new Exception("Не найдено ни одной оценки по студенту" + student.getName()));
     }
 
     //выводит все оценки по предмету по студенту
