@@ -17,6 +17,7 @@ public class Main {
         System.out.println("All logs: " + crazyLogger.getFullLog());
         System.out.println("First log: " + crazyLogger.findFirstMessage("message"));
         System.out.println("Last log: " + crazyLogger.findLastMessage("message"));
+        System.out.println(Arrays.asList(crazyLogger.findAllMessages("message")).toString());
 
     }
 }

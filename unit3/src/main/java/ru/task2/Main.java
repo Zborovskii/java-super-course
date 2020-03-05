@@ -13,33 +13,38 @@ public class Main {
 
         ResourceBundle bundleDefault = ResourceBundle.getBundle(BASE_NAME);
         ResourceBundle bundleEn = ResourceBundle.getBundle(BASE_NAME, Locale.ENGLISH);
+        Scanner in = new Scanner(System.in);
 
         while (true) {
             System.out.println("Chose language rus or en");
-
-            Scanner in = new Scanner(System.in);
             String inputString = in.nextLine();
 
-            if (inputString.equals("rus")) {
-                System.out.println("Выберите номер вопроса от 1 до 3");
+            switch (inputString) {
+                case "rus":
+                    printQuestions(bundleDefault);
+                    System.out.println("Выберите номер вопроса от 1 до 3");
 
-                inputString = in.nextLine();
-                if (Integer.parseInt(inputString) > 3) {
+                    inputString = in.nextLine();
+                    if (Integer.parseInt(inputString) > 3) {
+                        break;
+                    }
+
+                    printQuestionAndAnswer(bundleDefault, inputString);
                     break;
-                }
+                case "en":
+                    printQuestions(bundleEn);
+                    System.out.println("Chose the question number from 1 to 3");
 
-                printQuestionAndAnswer(bundleDefault, inputString);
-            } else if (inputString.equals("en")) {
-                System.out.println("Chose the question number from 1 to 3");
+                    inputString = in.nextLine();
+                    if (Integer.parseInt(inputString) > 3) {
+                        break;
+                    }
 
-                inputString = in.nextLine();
-                if (Integer.parseInt(inputString) > 3) {
+                    printQuestionAndAnswer(bundleEn, inputString);
                     break;
-                }
-
-                printQuestionAndAnswer(bundleEn, inputString);
-            } else {
-                System.out.println("You can input only \"rus\" or \"en\" ");
+                default:
+                    System.out.println("You can input only \"rus\" or \"en\" ");
+                    break;
             }
         }
     }
@@ -48,5 +53,11 @@ public class Main {
 
         System.out.println(resourceBundle.getString(String.format(QUESTION_FORMAT, inputString)));
         System.out.println(resourceBundle.getString(String.format(ANSWER_FORMAT, inputString)));
+    }
+
+    public static void printQuestions(ResourceBundle resourceBundle) {
+        for (Integer i = 1; i <= 3; i++) {
+            System.out.println(resourceBundle.getString(String.format(QUESTION_FORMAT, i)));
+        }
     }
 }
