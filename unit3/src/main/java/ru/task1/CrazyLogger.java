@@ -2,7 +2,9 @@ package ru.task1;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CrazyLogger {
     private StringBuilder log = new StringBuilder();
@@ -37,13 +39,11 @@ public class CrazyLogger {
         return log.substring(recordStartPoint + 1, log.indexOf(MESSAGES_SEPARATOR, messageStartPoint));
     }
 
-    public String[] findAllMessages(String message) {
-        ArrayList<String> messages = new ArrayList<>();
-        StringBuilder logCopy = log;
-        while (logCopy.indexOf(message) != -1) {
-            messages.add(getRecord(log.indexOf(message)));
-            logCopy.delete(0, logCopy.indexOf(MESSAGES_SEPARATOR, logCopy.indexOf(message)));
-        }
-        return messages.toArray(new String[0]);
+    public List<String> findAllMessages(String message) {
+        List<String> logArray = Arrays.asList(log.toString().split(MESSAGES_SEPARATOR));
+
+        return logArray.stream().
+                filter(item -> item.indexOf(message) != -1).
+                collect(Collectors.toList());
     }
 }
