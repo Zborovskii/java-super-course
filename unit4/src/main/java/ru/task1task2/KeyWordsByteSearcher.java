@@ -8,14 +8,13 @@ import java.util.Set;
 public class KeyWordsByteSearcher implements KeyWordsSearcher {
     private Map<String, Integer> foundedKeyWords;
 
-    public KeyWordsByteSearcher(String filePath, Charset charset) {
-        byte[] bytes = new byte[0];
+    public KeyWordsByteSearcher(String filePath, Charset charset) throws IOException {
+        byte[] bytes;
 
         try (BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(filePath))) {
-            bytes = new byte[inputStream.available()];
             bytes = inputStream.readAllBytes();
         } catch (IOException e) {
-            System.out.println("Ошибка в ходе чтения исходного файла");
+            throw new IOException("Ошибка в ходе чтения исходного файла");
         }
 
         foundedKeyWords = findKeyWords(new String(bytes, charset));
