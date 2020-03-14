@@ -15,7 +15,7 @@ public class KeyWordsByteSearcher implements KeyWordsSearcher {
             bytes = new byte[inputStream.available()];
             bytes = inputStream.readAllBytes();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Ошибка в ходе чтения исходного файла");
         }
 
         foundedKeyWords = findKeyWords(new String(bytes, charset));

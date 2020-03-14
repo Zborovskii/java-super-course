@@ -1,5 +1,8 @@
 package ru.task1task2;
 
+
+import static org.apache.axis2.util.JavaUtils.isJavaKeyword;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +18,6 @@ public interface KeyWordsSearcher {
     void extractInto(String fileName);
 
     default Map<String, Integer> findKeyWords(String text) {
-        KeyWordsService keyWordsService = new KeyWordsService();
         Map<String, Integer> foundedKeyWords = new HashMap<>();
 
         Matcher matcher = Pattern.compile("\\w+").matcher(text);
@@ -23,7 +25,7 @@ public interface KeyWordsSearcher {
         while (matcher.find()) {
             String foundedWord = matcher.group();
 
-            if (keyWordsService.isKeyWord(foundedWord)) {
+            if (isJavaKeyword(foundedWord)) {
                 if (foundedKeyWords.containsKey(foundedWord)) {
                     foundedKeyWords.put(foundedWord, foundedKeyWords.get(foundedWord) + 1);
                 } else {
