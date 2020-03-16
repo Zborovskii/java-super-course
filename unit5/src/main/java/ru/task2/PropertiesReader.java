@@ -14,20 +14,14 @@ public class PropertiesReader {
         try (FileInputStream input = new FileInputStream(path)) {
             properties.load(input);
         } catch (IOException e) {
-            printStream.println("Unable to read this file");
+            throw new RuntimeException("Не возможно прочитать файл по указанному пути: " + path);
         }
     }
 
-    public String getProperty(String key) {
-        try {
-            if (properties.containsKey(key)) {
-                return properties.getProperty(key);
-            } else {
-                throw new PropertyNotFoundException();
-            }
-        } catch (PropertyNotFoundException e) {
-            printStream.println(e.getMessage());
+    public String getProperty(String key) throws PropertyNotFoundException {
+        if (!properties.containsKey(key)) {
+            throw new PropertyNotFoundException();
         }
-        return "";
+        return properties.getProperty(key);
     }
 }
