@@ -17,7 +17,7 @@ public class KeyWordsSymbolSearcher implements KeyWordsSearcher {
                 lines = lines.concat(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Ошибка в ходе чтения исходного файла");
         }
         foundedKeyWords.putAll(findKeyWords(lines));
     }
@@ -34,7 +34,7 @@ public class KeyWordsSymbolSearcher implements KeyWordsSearcher {
                 writer.write(String.format(OUTPUT_FORMAT, keyWordRecord.getKey(), keyWordRecord.getValue()));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Ошибка в ходе записи файла");
         }
     }
 }
