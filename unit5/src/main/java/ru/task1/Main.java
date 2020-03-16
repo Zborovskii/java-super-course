@@ -11,7 +11,7 @@ public class Main {
 
     private static Scanner scanner;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         scanner = new Scanner(System.in);
         programInfo();
@@ -24,7 +24,7 @@ public class Main {
             if ((!Arrays.asList("show", "create", "delete", "edit").contains(userCommand[0]))
                     || (userCommand.length < 3 && userCommand[0].equals("edit"))
                     || (userCommand.length > 2 && Arrays.asList("show", "create", "delete").contains(userCommand[0]))) {
-                throw new Exception("Вы ввели неверную команду, посмотрите инструкцию с примерами");
+                throw new RuntimeException("Вы ввели неверную команду, посмотрите инструкцию с примерами");
             }
 
             switch (userCommand[0]) {
@@ -45,7 +45,7 @@ public class Main {
 
     }
 
-    public static void showContents(File dir) throws IOException {
+    public static void showContents(File dir) {
 
         if (dir.isDirectory()) {
             System.out.println("Содержимое директории " + dir + "\n");
@@ -66,46 +66,46 @@ public class Main {
                     System.out.print((char) c);
                 }
             } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+                throw new RuntimeException("ошибка при отображении содержимого файла");
             }
         }
     }
 
-    public static void createTextFile(File dir) throws IOException {
+    public static void createTextFile(File dir) {
 
         if (dir.exists()) {
-            throw new IOException("Такой файл уже существует, вы не можете создать файл с одинаковым названием");
+            throw new RuntimeException("Такой файл уже существует, вы не можете создать файл с одинаковым названием");
         }
 
         try (FileWriter writer = new FileWriter(dir, false)) {
             writer.flush();
         } catch (IOException ex) {
 
-            System.out.println(ex.getMessage());
+            throw new RuntimeException("Ошибка в процессе создания файла в диретктории: " + dir);
         }
     }
 
-    public static void deleteTextFile(File dir) throws IOException {
+    public static void deleteTextFile(File dir) {
 
         if (!dir.exists()) {
-            throw new IOException("Такого файла не существует, вы не можете удалять не существующий файл");
+            throw new RuntimeException("Такого файла не существует, вы не можете удалять не существующий файл");
         }
 
         if (dir.isDirectory()) {
-            throw new IOException("Вы не можете удалить директорию, для удаления выберите файл");
+            throw new RuntimeException("Вы не можете удалить директорию, для удаления выберите файл");
         }
     }
 
-    public static void editTextFile(File dir, String text) throws IOException {
+    public static void editTextFile(File dir, String text) {
         if (!dir.exists()) {
-            throw new IOException("Такого файла не существует, вы не можете изменить не существующий файл");
+            throw new RuntimeException("Такого файла не существует, вы не можете изменить не существующий файл");
         }
         try (FileWriter writer = new FileWriter(dir, true)) {
             writer.write(text);
             writer.append('\n');
             writer.flush();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            throw new RuntimeException("ошибка при изменении файла в диретории: " + dir);
         }
     }
 
