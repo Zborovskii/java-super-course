@@ -2,6 +2,7 @@ package ru.task2;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Properties;
 
 public class PropertiesReader {
@@ -16,10 +17,7 @@ public class PropertiesReader {
         }
     }
 
-    public String getProperty(String key) throws PropertyNotFoundException {
-        if (!properties.containsKey(key)) {
-            throw new PropertyNotFoundException();
-        }
-        return properties.getProperty(key);
+    public Optional<String> getProperty(String key) {
+        return Optional.ofNullable(properties.getProperty(key));
     }
 }

@@ -22,24 +22,29 @@ public class Main {
             String[] userCommand = inputString.split(" ");
 
             if ((!Arrays.asList("show", "create", "delete", "edit").contains(userCommand[0]))
-                    || (userCommand.length < 3 && userCommand[0].equals("edit"))
-                    || (userCommand.length > 2 && Arrays.asList("show", "create", "delete").contains(userCommand[0]))) {
-                throw new RuntimeException("Вы ввели неверную команду, посмотрите инструкцию с примерами");
+                || (userCommand.length < 3 && userCommand[0].equals("edit"))
+                || (userCommand.length > 2 && Arrays.asList("show", "create", "delete").contains(userCommand[0]))) {
+                System.out.println("Вы ввели неверную команду, посмотрите инструкцию с примерами");
             }
 
-            switch (userCommand[0]) {
-                case "show":
-                    showContents(new File(userCommand[1]));
-                    break;
-                case "create":
-                    createTextFile(new File(userCommand[1]));
-                    break;
-                case "delete":
-                    deleteTextFile(new File(userCommand[1]));
-                    break;
-                case "edit":
-                    editTextFile(new File(userCommand[1]), userCommand[2]);
-                    break;
+            try {
+
+                switch (userCommand[0]) {
+                    case "show":
+                        showContents(new File(userCommand[1]));
+                        break;
+                    case "create":
+                        createTextFile(new File(userCommand[1]));
+                        break;
+                    case "delete":
+                        deleteTextFile(new File(userCommand[1]));
+                        break;
+                    case "edit":
+                        editTextFile(new File(userCommand[1]), userCommand[2]);
+                        break;
+                }
+            } catch (RuntimeException ex) {
+                System.out.println("Ошибка при выполенние введенной команды");
             }
         }
 
@@ -111,9 +116,16 @@ public class Main {
 
     public static void programInfo() {
         System.out.println("Выможете вносить следующие команды:\n" +
-                "show + директория каталога или файла. Пример 'show /Users/macbookbro/Desktop/example/README1.md'\n" +
-                "create + директория каталога. Пример 'create /Users/macbookbro/Desktop/example/README1.md'\n" +
-                "delete + директория файла. Пример 'delete /Users/macbookbro/Desktop/example/README1.md'\n" +
-                "edit + директория файла + добавляемый текст. Пример 'edit /Users/macbookbro/Desktop/example/README1.md' added text");
+                               "show + директория каталога или файла. Пример 'show "
+                               + "/Users/macbookbro/Desktop/example/README1.md'\n"
+                               +
+                               "create + директория каталога. Пример 'create "
+                               + "/Users/macbookbro/Desktop/example/README1.md'\n"
+                               +
+                               "delete + директория файла. Пример 'delete /Users/macbookbro/Desktop/example/README1"
+                               + ".md'\n"
+                               +
+                               "edit + директория файла + добавляемый текст. Пример 'edit "
+                               + "/Users/macbookbro/Desktop/example/README1.md' added text");
     }
 }

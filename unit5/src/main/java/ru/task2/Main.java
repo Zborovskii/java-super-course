@@ -1,17 +1,19 @@
 package ru.task2;
 
+import java.util.Optional;
+
 public class Main {
 
     public static void main(String[] args) {
         PropertiesReader propertiesReader = new PropertiesReader("unit5/src/main/resources/properties.properties");
 
-        try {
-            System.out.println(propertiesReader.getProperty("property2"));
+        Optional<String> result = propertiesReader.getProperty("property2");
 
-        } catch (PropertyNotFoundException ex) {
-            throw new RuntimeException(ex.getMessage());
+        if (result.isPresent()) {
+            System.out.println(result.get());
+        } else {
+            System.out.println("не найдено проперти");
         }
     }
-
 
 }
